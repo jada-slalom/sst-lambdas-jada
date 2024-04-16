@@ -1,0 +1,104 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: GL Payment
+  license:
+    name: MIT
+paths:
+  /clients:
+    get:
+      summary: List all clients
+      # operationId should be the handler file name
+      operationId: testHandler
+      tags:
+        - clients
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: An paged array of clients
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:    
+              schema:
+                $ref: "#/components/schemas/Clients"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /clients/{clientId}:
+    get:
+      summary: Info for a specific client
+      operationId: getClientByIdHandler
+      tags:
+        - clients
+      parameters:
+        - name: clientId
+          in: path
+          required: true
+          description: The id of the client to retrieve
+          schema:
+            type: string
+      responses:
+        200:
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Clients"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Client:
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    Clients:
+      type: array
+      items:
+        $ref: "#/components/schemas/Client"
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    get:
+      summary: Returns a list of users.
+      description: Optional extended description in CommonMark or HTML.
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: string

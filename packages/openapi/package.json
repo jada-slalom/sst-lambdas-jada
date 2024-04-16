@@ -1,0 +1,14 @@
+{
+  "name": "@payment/openapi",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "sst bind vitest",
+    "typecheck": "tsc -noEmit"
+  },
+  "devDependencies": {
+    "@hey-api/openapi-ts": "^0.38.1",
+    "openapi-typescript": "^6.7.5",
+    "@types/node": "^20.12.7"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "extends": "@tsconfig/node18/tsconfig.json",
+  "exclude": ["packages"],
+  "compilerOptions": {
+    "types": ["jest", "node"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strictNullChecks": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+  }
+}
