@@ -1,7 +1,7 @@
-import { StackContext, Function, StaticSite, Api } from "sst/constructs";
+import { FunctionProps, StackContext } from "sst/constructs";
 import { esbuildOptions } from "../esbuild.options";
 
-export function LambdaStack({ stack }: StackContext) {
+export function LambdaStack({ app, stack }: StackContext) : Record<string, FunctionProps> {
   
   // lambda layer, 
   // once the lambda script becomes too big, we can use layer to store node_modules
@@ -9,7 +9,7 @@ export function LambdaStack({ stack }: StackContext) {
   //   code: lambda.Code.fromAsset("layers/nestjs"),
   // });
 
-  const testHandler = new Function(stack, `TestLambda`, {
+  const testHandler: FunctionProps = {
     handler: "packages/lambdas/src/handlers/testHandler.handler",
     environment: {
       LOG_LEVEL: "debug",
@@ -17,9 +17,9 @@ export function LambdaStack({ stack }: StackContext) {
     nodejs: {
       esbuild: esbuildOptions
     }
-  });
+  };
 
-  const getClientByIdHandler = new Function(stack, `getClientByIdLambda`, {
+  const getClientByIdHandler: FunctionProps = {
     handler: "packages/lambdas/src/handlers/getClientByIdHandler.handler",
     environment: {
       LOG_LEVEL: "debug",
@@ -37,10 +37,10 @@ export function LambdaStack({ stack }: StackContext) {
     layers:[
       // nestjslayer,  //attach layer
     ]
-  });
+  };
 
   return {
     testHandler,
-    getClientByIdHandler
+    getClientByIdHandler,
   }
 }

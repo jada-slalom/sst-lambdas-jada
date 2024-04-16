@@ -1,6 +1,11 @@
 import type { BuildOptions } from "esbuild";
 
-/**esbuild nestjs bundle options  */
+/**
+ * esbuild nestjs bundle options
+ * 
+ * nestjs has conflict with esbuild, this options will be required 
+ * for sst bundle work
+ * */
 export const esbuildOptions : BuildOptions = {
     platform: 'node',
     bundle: true,

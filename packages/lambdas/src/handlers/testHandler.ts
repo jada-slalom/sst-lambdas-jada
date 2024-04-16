@@ -1,8 +1,8 @@
-import { APIGatewayEvent, Context } from 'aws-lambda';
-import { TestService } from '../services/test.service';
-import { Client, Clients } from '@payment/openapi';
-import { providers } from '../providers';
 import { BaseAPIGatewayHandler } from '@payment/core';
+import { Client, Clients } from '@payment/openapi';
+import { APIGatewayEvent, Context } from 'aws-lambda';
+import { providers } from '../providers';
+import { TestService } from '../services/test.service';
 
 export class TestHandler extends BaseAPIGatewayHandler {
   constructor(){

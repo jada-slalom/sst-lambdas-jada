@@ -1,6 +1,6 @@
 import { SSTConfig } from "sst";
-import { LambdaStack } from "./stacks/LambdaStack";
 import { APIStack } from "./stacks/APIStack";
+import { LambdaStack } from "./stacks/LambdaStack";
 
 export default {
   config(_input) {
@@ -11,6 +11,7 @@ export default {
   },
   stacks(app) {
     app.stack(LambdaStack, { stackName: `${app.name}-lambdas-${app.stage}` });
-    app.stack(APIStack, { stackName: `${app.name}-api-${app.stage}` });
+    app.stack((stack)=> APIStack(stack, 'packages/openapi/swagger.yaml'), { stackName: `${app.name}-api-${app.stage}` });
+    
   }
 } satisfies SSTConfig;

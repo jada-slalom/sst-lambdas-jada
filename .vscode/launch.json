@@ -1,0 +1,33 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug SST Start",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/sst",
+      "runtimeArgs": ["dev", "--increase-timeout", "--stage=${input:stageID}", "--profile=${input:profileID}"],
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"],
+      "env": {
+        "AWS_SDK_LOAD_CONFIG": "1",
+        "AWS_PROFILE": "${input:profileID}",
+        "LOG_LEVEL": "debug",
+        "TZ": "America/Los_Angeles"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "stageID",
+      "type": "promptString",
+      "description": "stage to run as. Usually the username",
+    },
+    {
+      "id": "profileID",
+      "type": "promptString",
+      "description": "AWS account profile to use. Example: gldev",
+      "default": "default"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 import { INestApplicationContext, Logger, LoggerService, LogLevel, Provider } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { APIGatewayEvent,APIGatewayProxyResult, Context } from 'aws-lambda';
+import { APIGatewayEvent, APIGatewayProxyResult, Context } from 'aws-lambda';
 import { WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
-import { LambdaAppModule } from '../LambdaApp.module';
+import { LambdaAppModule } from '../lambdaApp.module';
 
 export class BaseAPIGatewayHandler{
     
