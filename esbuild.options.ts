@@ -21,6 +21,7 @@ export const esbuildOptions : BuildOptions = {
         '@grpc/grpc-js',
         '@grpc/proto-loader',
         '@nestjs/websockets/socket-module',
-        'class-transformer'
+        'class-transformer',
+        'class-validator'
     ]
 };
