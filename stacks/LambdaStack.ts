@@ -1,6 +1,11 @@
 import { FunctionProps, StackContext } from "sst/constructs";
+import { environments } from "../config";
 import { esbuildOptions } from "../esbuild.options";
 
+
+/**
+ * @Return  property keys are handler file names and values are FunctionProps
+*/
 export function LambdaStack({ app, stack }: StackContext) : Record<string, FunctionProps> {
   
   // lambda layer, 
@@ -9,13 +14,21 @@ export function LambdaStack({ app, stack }: StackContext) : Record<string, Funct
   //   code: lambda.Code.fromAsset("layers/nestjs"),
   // });
 
+  app.addDefaultFunctionEnv(environments);
+  // must be called before any stack with functions have been added to the application
+  app.setDefaultFunctionProps({
+    nodejs: {
+      esbuild: esbuildOptions
+    }
+  });
+
+  // Add handlers
+
   const testHandler: FunctionProps = {
     handler: "packages/lambdas/src/handlers/testHandler.handler",
     environment: {
+      // add handler level environment here
       LOG_LEVEL: "debug",
-    },
-    nodejs: {
-      esbuild: esbuildOptions
     }
   };
 
@@ -26,8 +39,9 @@ export function LambdaStack({ app, stack }: StackContext) : Record<string, Funct
     ]
   };
 
+  // { "{file name}": FunctionProps }
   return {
     testHandler,
     getClientByIdHandler,
-  }
+  } as Record<string, FunctionProps>
 }

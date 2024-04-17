@@ -68,6 +68,38 @@ export const handler = async (event: any, context: Context) =>
   await new TestHandler().lambdaHandler(event, context);
 ```
 
+4. Add your new handler to stacks/LambdaStack.ts
+
+    ```
+      const testHandler: FunctionProps = {
+        handler: "packages/lambdas/src/handlers/testHandler.handler",
+        environment: {
+          // add handler level environment here
+          LOG_LEVEL: "debug",
+        }
+      };
+    ```
+
+   Remember to add your handler to return
+   
+   ```
+    return {
+      testHandler,
+      ...
+    }
+   ```
+
+5. 
+```bash
+# Starts the Live Lambda Development environment.
+$ npm run dev
+```
+ 
+6. grab SiteUrl link from your console and open /api from browser
+   
+   ```
+   {SiteUrl}/api
+   ```
 
 ## Test
 

@@ -1,6 +1,5 @@
 import { swaggerToRoutes } from "@payment/openapi";
 import { Api, StackContext, use } from "sst/constructs";
-import { environments } from "../config";
 import { esbuildOptions } from "../esbuild.options";
 import { LambdaStack } from "./LambdaStack";
 
@@ -14,16 +13,8 @@ export function APIStack({ app, stack }: StackContext, path: string) {
   var handlers = use(LambdaStack);
   // should replaced with SSTAPI from gl tool repo
   // which include gateway default setting, auth setting, etc.
-
   var api = new Api(stack, `Api`);
-  app.addDefaultFunctionEnv(environments);
-  // must be called before any stack with functions have been added to the application
-  app.setDefaultFunctionProps({
-    nodejs: {
-      esbuild: esbuildOptions
-    }
-  });
-
+  
   // load routes from swagger.yaml
   api.addRoutes(stack, swaggerToRoutes( path, handlers));
   
