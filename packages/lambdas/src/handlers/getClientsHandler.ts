@@ -4,7 +4,7 @@ import { APIGatewayEvent, Context } from 'aws-lambda';
 import { providers } from '../providers';
 import { TestService } from '../services/test.service';
 
-export class TestHandler extends BaseAPIGatewayHandler {
+export class GetClientsHandler extends BaseAPIGatewayHandler {
   constructor(){
     super(providers);
   }
@@ -21,4 +21,4 @@ export class TestHandler extends BaseAPIGatewayHandler {
 
 // lambda entry point
 export const handler = async (event: any, context: Context) =>
-  await new TestHandler().lambdaHandler(event, context);
+  await new GetClientsHandler().lambdaHandler(event, context);
