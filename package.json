@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "openapi": "openapi-ts -i ./packages/openapi/swagger.yaml -o ./packages/openapi && npm install",
+    "openapi": "openapi-ts -i ./packages/openapi/swagger.yaml -o ./packages/openapi/dist && npm install",
     "dev": "sst dev",
     "build": "sst build",
     "deploy": "sst deploy",
@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@hey-api/openapi-ts": "^0.40.0",
     "@tsconfig/node18": "^18.2.4",
     "@types/aws-lambda": "^8.10.137",
     "@types/js-yaml": "^4.0.9",

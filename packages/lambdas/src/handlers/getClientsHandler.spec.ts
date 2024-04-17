@@ -1,11 +1,11 @@
 
-import { TestHandler } from "./testHandler";
 import { APIGatewayEvent, Context } from 'aws-lambda';
+import { GetClientsHandler } from "./getClientsHandler";
 
-describe('TestHandler', () => {
-  let baseHandler: TestHandler;
+describe('GetClientsHandler', () => {
+  let baseHandler: GetClientsHandler;
   beforeEach(async () => {
-    baseHandler = new TestHandler();
+    baseHandler = new GetClientsHandler();
   });
 
   it('bootstrap', async() => {

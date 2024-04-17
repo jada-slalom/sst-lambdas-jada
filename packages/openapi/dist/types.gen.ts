@@ -23,14 +23,14 @@ export type $OpenApiTs = {
         get: {
             req: {
                 /**
-                 * How many items to return at one time (max 100)
-                 */
+ * How many items to return at one time (max 100)
+ */
                 limit?: number;
             };
             res: {
                 /**
-                 * unexpected error
-                 */
+ * unexpected error
+ */
                 200: Error;
             };
         };
@@ -39,14 +39,14 @@ export type $OpenApiTs = {
         get: {
             req: {
                 /**
-                 * The id of the client to retrieve
-                 */
+ * The id of the client to retrieve
+ */
                 clientId: string;
             };
             res: {
                 /**
-                 * unexpected error
-                 */
+ * unexpected error
+ */
                 200: Error;
             };
         };

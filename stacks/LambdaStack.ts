@@ -24,8 +24,8 @@ export function LambdaStack({ app, stack }: StackContext) : Record<string, Funct
 
   // Add handlers
 
-  const testHandler: FunctionProps = {
-    handler: "packages/lambdas/src/handlers/testHandler.handler",
+  const getClientsHandler: FunctionProps = {
+    handler: "packages/lambdas/src/handlers/getClientsHandler.handler",
     environment: {
       // add handler level environment here
       LOG_LEVEL: "debug",
@@ -41,7 +41,7 @@ export function LambdaStack({ app, stack }: StackContext) : Record<string, Funct
 
   // { "{file name}": FunctionProps }
   return {
-    testHandler,
+    testHandler: getClientsHandler,
     getClientByIdHandler,
   } as Record<string, FunctionProps>
 }
