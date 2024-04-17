@@ -3,6 +3,7 @@ import { Api, StackContext, use } from "sst/constructs";
 import { environments } from "../config";
 import { esbuildOptions } from "../esbuild.options";
 import { LambdaStack } from "./LambdaStack";
+import { aws_lambda as lambda } from "aws-cdk-lib"
 
 /**
  * Generate API from swagger.yaml
@@ -15,13 +16,22 @@ export function APIStack({ app, stack }: StackContext, path: string) {
   // should replaced with SSTAPI from gl tool repo
   // which include gateway default setting, auth setting, etc.
 
+  // need to figure out how to export layer from the LambdaStack, 
+  // but just creating a separate one for APIStack for now.
+  const nestjslayer = new lambda.LayerVersion(stack, "nestjsLayer", {
+    code: lambda.Code.fromAsset("layers/nestjs"),
+  });
+
   var api = new Api(stack, `Api`);
   app.addDefaultFunctionEnv(environments);
   // must be called before any stack with functions have been added to the application
   app.setDefaultFunctionProps({
     nodejs: {
       esbuild: esbuildOptions
-    }
+    },
+    layers:[
+      nestjslayer,
+    ]
   });
 
   // load routes from swagger.yaml
@@ -36,7 +46,10 @@ export function APIStack({ app, stack }: StackContext, path: string) {
         handler: 'packages/functions/openapiHandler.handler',
         nodejs: {
           esbuild: esbuildOptions
-        }
+        },
+        layers:[
+          nestjslayer,
+        ]
       }
     },
     'GET /api-json': {
@@ -50,7 +63,10 @@ export function APIStack({ app, stack }: StackContext, path: string) {
         copyFiles: [{ from: path }],
         nodejs: {
           esbuild: esbuildOptions
-        }
+        },
+        layers:[
+          nestjslayer,
+        ]
       }
     }
   })
@@ -64,7 +80,10 @@ export function APIStack({ app, stack }: StackContext, path: string) {
         handler: 'packages/functions/healthHandler.handler',
         nodejs: {
           esbuild: esbuildOptions
-        }
+        },
+        layers:[
+          nestjslayer,
+        ]
       }
     }
   })

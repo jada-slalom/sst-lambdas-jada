@@ -21,6 +21,10 @@ export const esbuildOptions : BuildOptions = {
         '@grpc/grpc-js',
         '@grpc/proto-loader',
         '@nestjs/websockets/socket-module',
-        'class-transformer'
+        'class-transformer',
+        '@nestjs/common', 
+        '@nestjs/core', 
+        '@nestjs/config',
+        '@anyun-slalom/nest-lambda-core'
     ]
 };
