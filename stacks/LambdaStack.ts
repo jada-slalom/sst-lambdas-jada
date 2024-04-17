@@ -34,7 +34,6 @@ export function LambdaStack({
     nodejs: {
       esbuild: esbuildOptions,
     },
-    layers: [nestjslayer],
   };
 
   const getClientByIdHandler: FunctionProps = {
@@ -42,7 +41,6 @@ export function LambdaStack({
     nodejs: {
       esbuild: esbuildOptions,
     },
-    layers: [nestjslayer],
   };
 
   // { "{file name}": FunctionProps }
