@@ -1,5 +1,6 @@
 import { swaggerToRoutes } from "@payment/openapi";
 import { Api, StackContext, use } from "sst/constructs";
+import { environments } from "../config";
 import { esbuildOptions } from "../esbuild.options";
 import { LambdaStack } from "./LambdaStack";
 
@@ -14,19 +15,18 @@ export function APIStack({ app, stack }: StackContext, path: string) {
   // should replaced with SSTAPI from gl tool repo
   // which include gateway default setting, auth setting, etc.
 
-  var api = new Api(stack, `Api`, {
-      defaults: {
-        function: {
-          nodejs: {
-            esbuild: esbuildOptions
-          }
-        },
-      }
-    });
+  var api = new Api(stack, `Api`);
+  app.addDefaultFunctionEnv(environments);
+  // must be called before any stack with functions have been added to the application
+  app.setDefaultFunctionProps({
+    nodejs: {
+      esbuild: esbuildOptions
+    }
+  });
 
   // load routes from swagger.yaml
   api.addRoutes(stack, swaggerToRoutes( path, handlers));
-
+  
   // add open api links
   api.addRoutes(stack, {
     'GET /api': {
@@ -34,6 +34,9 @@ export function APIStack({ app, stack }: StackContext, path: string) {
       function : {
         functionName: app.logicalPrefixedName('api'),
         handler: 'packages/functions/openapiHandler.handler',
+        nodejs: {
+          esbuild: esbuildOptions
+        }
       }
     },
     'GET /api-json': {
@@ -45,6 +48,9 @@ export function APIStack({ app, stack }: StackContext, path: string) {
           FILEPATH: path
         },
         copyFiles: [{ from: path }],
+        nodejs: {
+          esbuild: esbuildOptions
+        }
       }
     }
   })
@@ -56,6 +62,9 @@ export function APIStack({ app, stack }: StackContext, path: string) {
       function : {
         functionName: app.logicalPrefixedName('health'),
         handler: 'packages/functions/healthHandler.handler',
+        nodejs: {
+          esbuild: esbuildOptions
+        }
       }
     }
   })

@@ -21,19 +21,6 @@ export function LambdaStack({ app, stack }: StackContext) : Record<string, Funct
 
   const getClientByIdHandler: FunctionProps = {
     handler: "packages/lambdas/src/handlers/getClientByIdHandler.handler",
-    environment: {
-      LOG_LEVEL: "debug",
-    },
-    nodejs: {
-      esbuild: {
-        external: [
-          "@nestjs/common", 
-          "@nestjs/core", 
-          "@nestjs/config",
-          "@anyun-slalom/nest-lambda-core"
-        ]
-      }
-    },
     layers:[
       // nestjslayer,  //attach layer
     ]
