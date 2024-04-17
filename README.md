@@ -3,30 +3,30 @@
 [SST](https://docs.sst.dev/)
 [NestJS](https://github.com/nestjs/nest)
 
-
-## Installation
+## Run Project
+### Installation
 
 ```bash
 $ npm install
 ```
 
-## Debug and test your Lambda functions locally
+### Debug and test your Lambda functions locally
 
 ```bash
 # Starts the Live Lambda Development environment.
 $ npm run dev
 ```
 
-## Deploy
+### Deploy
 ```bash
 $ npm run deploy
 ```
 
 
 
-# Build Project
+## Build Project
 
-API-First Appoach
+API-First Approach
 
 1. Update swagger.yaml under /packages/core with your new endpoint defination
    
