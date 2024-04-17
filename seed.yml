@@ -1,0 +1,3 @@
+before_build:
+  - cd layers/nestjs/nodejs
+  - npm install
