@@ -1,3 +1,2 @@
 before_deploy:
   - cd layers/nestjs/nodejs && npm install
-  - cd layers/nestjs/nodejs && ls -la

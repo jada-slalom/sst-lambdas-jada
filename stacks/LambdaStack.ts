@@ -10,7 +10,7 @@ export function LambdaStack({
   app,
   stack,
 }: StackContext): Record<string, FunctionProps> {
-  const nestjslayer = new lambda.LayerVersion(stack, "nestjsLayerJadaTest", {
+  const nestjslayer = new lambda.LayerVersion(stack, "nestjsLayerJada", {
     code: lambda.Code.fromAsset("layers/nestjs"),
   });
 
