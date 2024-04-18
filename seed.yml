@@ -1,2 +1,3 @@
-before_deploy:
+compile:
+  - npm install
   - cd layers/nestjs/nodejs && npm install
