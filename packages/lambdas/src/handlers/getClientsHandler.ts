@@ -13,7 +13,9 @@ export class GetClientsHandler extends BaseAPIGatewayHandler {
     var service = this.app?.get(TestService);
     var client: Client = {
       id: 1,
-      name: service.getHello()
+      name: service.getHello(),
+      //@ts-ignore
+      test: process.env.JADA_TEST_SECRET,
     };
     return [client];
   };
